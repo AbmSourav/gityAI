@@ -6,7 +6,7 @@ import { setup } from "./setup.js";
 import { init } from "./init.js";
 import { commitMessage } from "./commitMessage.js";
 
-export async function command() {
+export function command() {
 	const args = parseArgs(Deno.args, {
 		boolean: ["help"],
 		alias: { help: "h", version: "v", init: "i" },

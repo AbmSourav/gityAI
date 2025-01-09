@@ -17,7 +17,7 @@ export function help(args, force = false) {
 	--cm		Generate commit message
 	--cm -s		Generate commit message and save in markdown file
 	-h, --help	Display this help message
-	-v, --version	Display the version of GitAI`,
+	-v, --version	Display the version of GitAI\n`,
 		"color: gray",
 	);
 

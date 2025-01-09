@@ -1,11 +1,11 @@
-import { form } from "../terminalUI/form.js";
+import { textPrompt } from "../terminalUI/textPrompt.js";
 
 export async function setup(args) {
 	if (!args?.setup) {
 		return;
 	}
 
-	const apiKey = form("Set Gemini AI API Key");
+	const apiKey = textPrompt("Set Gemini AI API Key");
 
 	if (!apiKey) {
 		return console.error(

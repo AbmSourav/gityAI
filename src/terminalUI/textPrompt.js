@@ -1,4 +1,4 @@
-export function form(label) {
+export function textPrompt(label) {
 	const boxWidth = Deno.consoleSize().columns / 2;
 	const widthWithLabel = boxWidth + label.length + 2;
 

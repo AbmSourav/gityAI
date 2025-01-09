@@ -1,6 +1,6 @@
 import { promptSelect } from "jsr:@std/cli/unstable-prompt-select";
 
-export function selectForm(label, options) {
+export function selectPrompt(label, options) {
 	const boxWidth = Deno.consoleSize().columns / 2;
 	const widthWithLabel = boxWidth + label.length + 2;
 
@@ -10,7 +10,7 @@ export function selectForm(label, options) {
 	);
 
 	// both sides border
-	options.forEach((option) => {
+	options.forEach(() => {
 		console.log(
 			"\x1B[90m│" + " ".repeat(widthWithLabel) + "\x1B[90m│\x1B[0m",
 		);

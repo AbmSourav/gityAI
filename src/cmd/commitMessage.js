@@ -1,6 +1,6 @@
 import { projectInitialized } from "../helper/projectInitialized.js";
 import { geminiClient } from "../geminiClient.js";
-import { selectForm } from "../terminalUI/selectForm.js";
+import { selectPrompt } from "../terminalUI/selectPrompt.js";
 import { spinner } from "../terminalUI/spinner.js";
 import { help } from "./help.js";
 
@@ -61,7 +61,7 @@ export async function commitMessage(args) {
 			"Commit Message: \n \x1b[94m" + commitMessage + "\x1b[0m\n",
 		);
 		console.log(
-			"\x1b[90m Commit Message created. Please review above content.\x1b[0m",
+			"\x1b[90m Commit Message generated. Please review above content.\x1b[0m",
 		);
 	}
 
@@ -73,7 +73,7 @@ export async function commitMessage(args) {
 }
 
 function afterCommitMessage(args) {
-	const selectedOption = selectForm("Select one of below", [
+	const selectedOption = selectPrompt("Select one of below", [
 		"* Happy with it",
 		"* Generate another one",
 		"* My prompt",
@@ -96,7 +96,7 @@ async function putCommitMessageInFile(args, commitMessage) {
 	await Deno.writeTextFile(path, commitMessage)
 		.then(() => {
 			console.log(
-				`\x1b[90m Commit message has been saved in ${path}\n Please review.\x1b[0m`,
+				`\x1b[90m Commit message has been generated and saved in ${path}\n Please review.\x1b[0m`,
 			);
 		});
 }
