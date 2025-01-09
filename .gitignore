@@ -1,0 +1,10 @@
+.DS_Store
+*.DS_Store
+
+gitAI
+notes
+.env
+
+.gitai
+
+main.php
