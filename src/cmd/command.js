@@ -9,11 +9,11 @@ import { commitMessage } from "./commitMessage.js";
 export function command() {
 	const args = parseArgs(Deno.args, {
 		boolean: ["help"],
-		alias: { help: "h", version: "v", init: "i" },
-		default: { help: true },
+		alias: { help: "h", version: "v" },
+		// default: { help: true },
 	});
 
-	// console.log("args", args);
+	console.log("args", args, args?._[0] === "version");
 
 	help(args);
 	version(args);

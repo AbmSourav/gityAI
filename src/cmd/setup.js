@@ -1,7 +1,7 @@
 import { textPrompt } from "../terminalUI/textPrompt.js";
 
 export async function setup(args) {
-	if (!args?.setup) {
+	if (args?._[0] !== "setup") {
 		return;
 	}
 

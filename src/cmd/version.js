@@ -1,5 +1,5 @@
 export function version(args) {
-	if (!args?.version) {
+	if (args?._[0] !== "version" && !args?.v) {
 		return;
 	}
 
@@ -20,5 +20,5 @@ export function version(args) {
 		"color: gray",
 	);
 
-	Deno.exit();
+	Deno.exit(0);
 }

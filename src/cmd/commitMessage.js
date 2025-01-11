@@ -5,7 +5,7 @@ import { spinner } from "../terminalUI/spinner.js";
 import { help } from "./help.js";
 
 export async function commitMessage(args) {
-	if (!args?.cm) {
+	if (args?._[0] !== "cm") {
 		return;
 	}
 

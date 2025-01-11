@@ -1,5 +1,5 @@
 export async function init(args) {
-	if (!args?.init) {
+	if (args?._[0] !== "init" && !args?.i) {
 		return;
 	}
 

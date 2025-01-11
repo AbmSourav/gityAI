@@ -1,7 +1,7 @@
 export function help(args, force = false) {
 	if (
 		!force &&
-		(Object.keys(args).length > 3 || args.help === false)
+		(args?._[0] !== "help" && args.h === false)
 	) {
 		return;
 	}
@@ -12,14 +12,14 @@ export function help(args, force = false) {
   Usage: gitAI [command] [options]
 
   Commands:
-	--setup		Setup GitAI with Gemini API Key
-	--init, -i	Initialize GitAI for project
-	--cm		Generate commit message
-	--cm -s		Generate commit message and save in markdown file
-	-h, --help	Display this help message
-	-v, --version	Display the version of GitAI\n`,
+	setup		Setup GitAI with Gemini API Key
+	init, -i	Initialize GitAI for project
+	cm			Generate commit message
+	cm -s		Generate commit message and save in markdown file
+	help, -h	Display this help message
+	version, -v	Display the version of GitAI\n`,
 		"color: gray",
 	);
 
-	Deno.exit();
+	Deno.exit(0);
 }
