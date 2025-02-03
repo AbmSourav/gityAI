@@ -6,17 +6,11 @@ import { setup } from "./setup.js";
 import { init } from "./init.js";
 import { commitMessage } from "./commitMessage.js";
 
-export function command() {
+export async function command() {
 	const args = parseArgs(Deno.args, {
 		boolean: ["help"],
 		alias: { help: "h", version: "v" },
-		// default: { help: true },
 	});
-
-	console.log("args", args, args?._[0] === "version");
-
-	help(args);
-	version(args);
 
 	if (!Deno.env.get("GEMINI_API_KEY")) {
 		console.log("%c\n  Please setup GitAI", "color: red");
@@ -27,5 +21,8 @@ export function command() {
 	setup(args);
 	init(args);
 
-	commitMessage(args);
+	await commitMessage(args);
+
+	version(args);
+	help(args);
 }

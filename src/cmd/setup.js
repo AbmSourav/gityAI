@@ -5,7 +5,7 @@ export async function setup(args) {
 		return;
 	}
 
-	const apiKey = textPrompt("Set Gemini AI API Key");
+	const apiKey = textPrompt("Set Gemini AI API Key", "GitAI uses Gemini AI, you need to set a API key to use it.");
 
 	if (!apiKey) {
 		return console.error(
@@ -19,4 +19,5 @@ export async function setup(args) {
 	await Deno.writeFile(".env", data);
 
 	console.log("%c  GitAI has been configured\n", "color: green");
+	Deno.exit(0);
 }

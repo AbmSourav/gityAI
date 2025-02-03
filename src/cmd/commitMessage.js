@@ -1,8 +1,9 @@
 import { projectInitialized } from "../helper/projectInitialized.js";
-import { geminiClient } from "../geminiClient.js";
 import { selectPrompt } from "../terminalUI/selectPrompt.js";
-import { spinner } from "../terminalUI/spinner.js";
 import { help } from "./help.js";
+import { generateCommitMessage } from "./commitMessage/generateCommitMessage.js";
+import { handlePrompt } from "./commitMessage/handlePrompt.js";
+import { makeCommit } from "./commitMessage/makeCommit.js";
 
 export async function commitMessage(args) {
 	if (args?._[0] !== "cm") {
@@ -15,7 +16,7 @@ export async function commitMessage(args) {
 			"color: red",
 		);
 		help(args, true);
-		Deno.exit();
+		Deno.exit(0);
 	}
 
 	const gitDiff = new Deno.Command("git", {
@@ -34,9 +35,7 @@ export async function commitMessage(args) {
 		return;
 	}
 
-	spinner.start();
-
-	const res = await geminiClient([{
+	const context = [{
 		parts: [
 			{
 				text:
@@ -44,35 +43,10 @@ export async function commitMessage(args) {
 			},
 			{ text: diff },
 		],
-	}]);
+	}];
 
-	spinner.stop();
+	let commitMessage = await generateCommitMessage(args, context);
 
-	if (res.status !== 200) {
-		return console.error(await res.error());
-	}
-
-	const data = await res.json();
-
-	const commitMessage = data?.candidates[0]?.content?.parts[0]?.text ?? "";
-
-	if (!args?.s) {
-		console.log(
-			"Commit Message: \n \x1b[94m" + commitMessage + "\x1b[0m\n",
-		);
-		console.log(
-			"\x1b[90m Commit Message generated. Please review above content.\x1b[0m",
-		);
-	}
-
-	putCommitMessageInFile(args, commitMessage);
-
-	setTimeout(() => {
-		afterCommitMessage(args);
-	}, 100);
-}
-
-function afterCommitMessage(args) {
 	const selectedOption = selectPrompt("Select one of below", [
 		"* Happy with it",
 		"* Generate another one",
@@ -80,23 +54,13 @@ function afterCommitMessage(args) {
 	]);
 
 	if (selectedOption.trim() === "* Generate another one") {
-		commitMessage(args);
+		commitMessage = await generateCommitMessage(args, context);
 	} else if (selectedOption.trim() === "* My prompt") {
-		// console.log("Your prompt");
-	}
-}
-
-async function putCommitMessageInFile(args, commitMessage) {
-	if (!args?.s) {
-		return;
+		await handlePrompt(args, diff, commitMessage);
+		Deno.exit(0);
 	}
 
-	const path = Deno.cwd() + "/.gitai/commit-message.md";
+	await makeCommit(args, commitMessage);
 
-	await Deno.writeTextFile(path, commitMessage)
-		.then(() => {
-			console.log(
-				`\x1b[90m Commit message has been generated and saved in ${path}\n Please review.\x1b[0m`,
-			);
-		});
+	Deno.exit(0);
 }

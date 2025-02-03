@@ -15,7 +15,7 @@ export function version(args) {
 
 	console.log(
 		`
-  %cDeveloped with 🧡 by Keramot<keramotul.islam@gmail.com>
+  %cDeveloped with 🧡 by Keramot <keramotul.islam@gmail.com>
   `,
 		"color: gray",
 	);

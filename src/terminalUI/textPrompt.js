@@ -1,26 +1,15 @@
-export function textPrompt(label) {
-	const boxWidth = Deno.consoleSize().columns / 2;
-	const widthWithLabel = boxWidth + label.length + 2;
+import { drawBox } from "./drowBox.js";
 
-	// top border
-	console.log(
-		"\n\x1B[90m┌ " + label + " " + "─".repeat(boxWidth) + "┐\x1B[0m",
-	);
+export function textPrompt(label, description = '', rows = 1, fullWidth = false) {
+	drawBox(rows, label, description, fullWidth);
 
-	// both sides border
-	console.log("\x1B[90m│" + " ".repeat(widthWithLabel) + "\x1B[90m│\x1B[0m");
-
-	// bottom border
-	console.log("\x1B[90m└" + "─".repeat(widthWithLabel) + "┘\x1B[0m");
-	console.log(
-		"\x1B[90mGitAI uses Gemini AI, you need to set a API key to use it.\x1B[0m",
-	);
-
-	// cursor positioning
-	console.log("\x1b[4A");
 	const input = prompt(" ");
 
-	console.log("\x1B[1B");
+	if (rows > 1) {
+		console.log("\x1B[" + (rows - 1) + "B");
+		return input;
+	}
 
+	console.log("\x1B[1B");
 	return input;
 }
