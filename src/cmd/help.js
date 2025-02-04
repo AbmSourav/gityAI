@@ -1,16 +1,16 @@
-export function help(args, force = false) {
+export function help() {
 	console.log(
 		`%c
-  GitAI is a CLI tool that uses AI to automate Git commit message, PR description etc for you.
-  Usage: gitAI [command] [options]
+  GityAI is a CLI tool that uses AI to automate Git commit message, PR description etc for you.
+  Usage: GityAI [command] [options]
 
   Commands:
-	setup		Setup GitAI with Gemini API Key
-	init, -i	Initialize GitAI for project
+	setup		Setup GityAI with Gemini API Key
+	init, -i	Initialize GityAI for project
 	cm -s		Generate commit message and save in markdown file
 	cm		Generate commit message
 	help, -h	Display this help message
-	version, -v	Display the version of GitAI\n`,
+	version, -v	Display the version of GityAI\n`,
 		"color: gray",
 	);
 

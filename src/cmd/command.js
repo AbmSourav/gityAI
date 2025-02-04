@@ -12,14 +12,15 @@ export async function command() {
 		alias: { help: "h", version: "v" },
 	});
 
+	await setup(args);
+
 	if (!Deno.env.get("GEMINI_API_KEY")) {
-		console.log("%c\n  Please setup GitAI", "color: red");
+		console.log("%c\n  Please setup GityAI", "color: red");
 		help(args, true);
 		Deno.exit();
 	}
 
-	setup(args);
-	init(args);
+	await init(args);
 
 	await commitMessage(args);
 

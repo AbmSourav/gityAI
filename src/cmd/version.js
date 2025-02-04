@@ -3,12 +3,12 @@ export function version(args) {
 		return;
 	}
 
-	const appVersion = Deno.env.get("GITAI_VERSION");
+	const appVersion = Deno.env.get("GITYAI_VERSION");
 
 	console.log(
 		`
-  %cGitAI version: ${appVersion}
-  GitAI is a CLI tool that uses AI to write commit message, PR description etc for you.
+  %cGityAI version: ${appVersion}
+  GityAI is a CLI tool that uses AI to write commit message, PR description etc for you.
   `,
 		"color: green",
 	);

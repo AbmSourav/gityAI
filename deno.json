@@ -6,7 +6,7 @@
 		"@std/assert": "jsr:@std/assert@1"
 	},
 	"fmt": {
-		"exclude": ["gitAI"],
+		"exclude": ["GityAI"],
 		"useTabs": true,
 		"indentWidth": 4
 	}

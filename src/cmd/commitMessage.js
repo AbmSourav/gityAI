@@ -12,7 +12,7 @@ export async function commitMessage(args) {
 
 	if (!await projectInitialized()) {
 		console.log(
-			"%c\n  Please initialize GitAI for this project",
+			"%c\n  Please initialize GityAI for this project",
 			"color: red",
 		);
 		help(args, true);

@@ -2,8 +2,8 @@ import { selectPrompt } from "../../terminalUI/selectPrompt.js";
 
 export async function makeCommit(args, commitMessage) {
 	const selectedOption = selectPrompt("Select one of below options", [
-		"* Make Commit",
 		"* Make Sign Commit",
+		"* Make Commit",
 		"* Don't Make Commit"
 	]);
 
@@ -11,14 +11,14 @@ export async function makeCommit(args, commitMessage) {
 		Deno.exit(0);
 	}
 
-	const filePath = Deno.cwd() + "/.gitai/commit-message.md";
+	const filePath = Deno.cwd() + "/.GityAI/commit-message.md";
 
 	// unsigned commit
 	if (selectedOption.trim() === "* Make Commit") {
 		if (!args?.s) {
 			// unsigned commit without file
 			await new Deno.Command("git", {
-				args: ["commit -am", commitMessage],
+				args: ["commit", "-am", commitMessage],
 				stdout: "inherit",
 				stderr: "inherit",
 			}).output();
@@ -28,7 +28,7 @@ export async function makeCommit(args, commitMessage) {
 
 		// unsigned commit with file
 		await new Deno.Command("git", {
-			args: ["commit -F", filePath],
+			args: ["commit", "-F", filePath],
 			stdout: "inherit",
 			stderr: "inherit",
 		}).output();
@@ -41,7 +41,7 @@ export async function makeCommit(args, commitMessage) {
 	if (!args?.s) {
 		// sign commit without file
 		await new Deno.Command("git", {
-			args: ["commit -S -am", commitMessage],
+			args: ["commit", "-S", "-am", commitMessage],
 			stdout: "inherit",
 			stderr: "inherit",
 		}).output();

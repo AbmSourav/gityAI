@@ -1,12 +1,14 @@
 .DS_Store
 *.DS_Store
 
-gitAI
 notes
 .env
 
-.gitai
+.gityAI
 
 main.php
 
-textarea.js
+build
+build/*
+
+.gityai

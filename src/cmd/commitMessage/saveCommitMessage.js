@@ -3,7 +3,7 @@ export async function saveCommitMessage(args, commitMessage) {
 		return;
 	}
 
-	const path = Deno.cwd() + "/.gitai/commit-message.md";
+	const path = Deno.cwd() + "/.GityAI/commit-message.md";
 
 	await Deno.writeTextFile(path, commitMessage)
 		.finally(() => {
