@@ -1,7 +1,7 @@
 export function help() {
 	console.log(
 		`%c
-  GityAI is a CLI tool that uses AI to automate Git commit message, PR description etc for you.
+  GityAI is a agentic AI tool that can automate Git workflows.
   Usage: GityAI [command] [options]
 
   Commands:

@@ -47,5 +47,6 @@ export async function init(args) {
 		console.error(`Error creating file: ${err}`);
 	}
 
-	console.log("\x1b[90m\n  Initialized\x1b[0m");
+	console.log("\x1b[90m\n  Initialized 🎉\x1b[0m\n");
+	Deno.exit(0);
 }
