@@ -43,3 +43,10 @@ gityai init
 ```bash
 gityai <command> [options]
 ```
+
+## Generate Commit Message
+Generate a Git commit message based on the changes made in the project directory:
+
+```bash
+gityai cm -s
+```
