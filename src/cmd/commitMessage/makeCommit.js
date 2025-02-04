@@ -1,13 +1,13 @@
 import { selectPrompt } from "../../terminalUI/selectPrompt.js";
 
 export async function makeCommit(args, commitMessage) {
-	const selectedOption = selectPrompt("Select one of below options", [
+	const selectedOption = selectPrompt("Select one of below", [
 		"* Make Sign Commit",
 		"* Make Commit",
 		"* Don't Make Commit"
 	]);
 
-	if (selectedOption.trim() === "Don't Make Commit") {
+	if (selectedOption.trim() === "* Don't Make Commit") {
 		Deno.exit(0);
 	}
 
