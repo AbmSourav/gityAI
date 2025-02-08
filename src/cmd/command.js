@@ -5,12 +5,15 @@ import { version } from "./version.js";
 import { setup } from "./setup.js";
 import { init } from "./init.js";
 import { commitMessage } from "./commitMessage.js";
+import { setupAndInit } from "./setupAndInit.js";
 
 export async function command() {
 	const args = parseArgs(Deno.args, {
 		boolean: ["help"],
 		alias: { help: "h", version: "v" },
 	});
+
+	await setupAndInit(args);
 
 	await setup(args);
 

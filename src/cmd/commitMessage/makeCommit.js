@@ -11,7 +11,7 @@ export async function makeCommit(args, commitMessage) {
 		Deno.exit(0);
 	}
 
-	const filePath = Deno.cwd() + "/.GityAI/commit-message.md";
+	const filePath = Deno.cwd() + "/.GityAI/cm.md";
 
 	// unsigned commit
 	if (selectedOption.trim() === "* Make Commit") {

@@ -1,6 +1,7 @@
+import { findContentInFile } from "../helper/findContentInFile.js";
 import { textPrompt } from "../terminalUI/textPrompt.js";
 
-export async function setup(args) {
+export async function setup(args, exit = true) {
 	if (args?._[0] !== "setup") {
 		return;
 	}
@@ -15,9 +16,20 @@ export async function setup(args) {
 	}
 
 	const encoder = new TextEncoder();
-	const data = encoder.encode("GEMINI_API_KEY=" + apiKey + "\n");
-	await Deno.writeFile(".env", data);
+	const apiKeyData = encoder.encode("\nGEMINI_API_KEY=" + apiKey + "\n");
+	const hasGiminiEnv = await findContentInFile(Deno.cwd() + "/.env", "GEMINI_API_KEY=", true);
+	if (! hasGiminiEnv) {
+		await Deno.writeFile(Deno.cwd() + "/.env", apiKeyData, { append: true });
+	}
 
-	console.log("%c  GityAI has been configured\n", "color: green");
-	Deno.exit(0);
+	const hasEnvInGitIgnore = await findContentInFile(Deno.cwd() + "/.gitignore", ".env");
+	if (! hasEnvInGitIgnore) {
+		await Deno.writeTextFile(Deno.cwd() + "/.gitignore", "\n.env\n", { append: true });
+	}
+
+	console.log("%c\n GityAI has been configured\n", "color: green");
+
+	if (exit) {
+		Deno.exit(0);
+	}
 }

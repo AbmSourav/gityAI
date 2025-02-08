@@ -8,7 +8,7 @@ export function version(args) {
 	console.log(
 		`
   %cGityAI version: ${appVersion}
-  GityAI is a CLI tool that uses AI to write commit message, PR description etc for you.
+  GityAI is a agentic AI tool that can automate Git workflows.
   `,
 		"color: green",
 	);

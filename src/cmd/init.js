@@ -1,3 +1,5 @@
+import { findContentInFile } from "../helper/findContentInFile.js";
+
 export async function init(args) {
 	if (args?._[0] !== "init" && !args?.i) {
 		return;
@@ -5,17 +7,23 @@ export async function init(args) {
 
 	const path = Deno.cwd();
 
+	const gitDir = await Deno.stat(path + "/.git").then((dirInfo) => dirInfo).catch((err) => err);
+	if (!gitDir?.isDirectory) {
+		console.error("%c Error: Git is not initialized. GityAI only works in a git repository.", "color: red");
+		Deno.exit(0);
+	}
+
 	let hasGityAIDir = await Deno.stat(path + "/.gityai")
 		.then((dirInfo) => dirInfo)
 		.catch(() => false);
 
 	if (hasGityAIDir?.isDirectory) {
-		console.log("\x1b[90m\n  Already initialized\x1b[0m\n");
-		return;
+		console.log("\x1b[90m Already initialized\x1b[0m\n");
+		Deno.exit(0);
 	}
 
 	const hasCommitMessageFile = await Deno.stat(
-		path + "/.gityai/commit-message.md",
+		path + "/.gityai/cm.md",
 	)
 		.then((fileInfo) => fileInfo)
 		.catch(() => false);
@@ -36,17 +44,21 @@ export async function init(args) {
 		if (hasGityAIDir?.isDirectory && !hasCommitMessageFile?.isFile) {
 			const encoder = new TextEncoder();
 			await Deno.writeFile(
-				path + "/.gityai/commit-message.md",
+				path + "/.gityai/cm.md",
 				encoder.encode(""),
 			);
-			await Deno.writeTextFile(path + "/.gitignore", "\n.gityai", {
-				append: true,
-			});
+
+			const hasGityAiInGitIgnore = await findContentInFile(Deno.cwd() + "/.gitignore", ".gityai");
+			if (! hasGityAiInGitIgnore) {
+				await Deno.writeTextFile(path + "/.gitignore", "\n.gityai\n", {
+					append: true,
+				});
+			}
 		}
 	} catch (err) {
 		console.error(`Error creating file: ${err}`);
 	}
 
-	console.log("\x1b[90m\n  Initialized 🎉\x1b[0m\n");
+	console.log("%c GityAI Initialized for this project 🎉\n", "color: green");
 	Deno.exit(0);
 }
