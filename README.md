@@ -20,20 +20,11 @@ Then run `gityai` on a newly open terminal to check if the installation was succ
 
 ## Setup
 
-To setup GityAI, get Gemini API key from [Gemini API](https://aistudio.google.com/apikey).
-Then run the below command or create a `.env` file in the project root directory and add the API key: `GEMINI_API_KEY=<your_api_key>`
+To setup and initialize GityAI for a project, get Gemini API key from [Gemini API](https://aistudio.google.com/apikey).
+Then run the below command.
 
 ```bash
-gityai setup
-```
-
-<br>
-
-## Project initialization
-For using GityAI in a project, you need to initialize it in the project directory:
-
-```bash
-gityai init
+gityai setup -i
 ```
 
 <br>

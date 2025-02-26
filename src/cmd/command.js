@@ -17,7 +17,12 @@ export async function command() {
 
 	await setup(args);
 
-	if (!Deno.env.get("GEMINI_API_KEY")) {
+	if (
+		!Deno.env.get("GEMINI_API_KEY") &&
+		(!args?.version || !args?.v) &&
+		args?._[0] !== 'help' &&
+		!args?.h
+	) {
 		console.log("%c\n  Please setup GityAI", "color: red");
 		help(args, true);
 		Deno.exit();

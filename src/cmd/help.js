@@ -2,7 +2,7 @@ export function help() {
 	console.log(
 		`%c
   GityAI is a agentic AI tool that can automate Git workflows.
-  Usage: GityAI [command] [options]
+  Usage: gityai [command] [options]
 
   Commands:
 	setup		Setup GityAI with Gemini API Key

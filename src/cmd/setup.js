@@ -6,6 +6,8 @@ export async function setup(args, exit = true) {
 		return;
 	}
 
+	const appVersion = Deno.env.get("GITYAI_VERSION");
+
 	const apiKey = textPrompt("Set Gemini AI API Key", "GityAI uses Gemini AI, you need to set a API key to use it.");
 
 	if (!apiKey) {
@@ -16,7 +18,7 @@ export async function setup(args, exit = true) {
 	}
 
 	const encoder = new TextEncoder();
-	const apiKeyData = encoder.encode("\nGEMINI_API_KEY=" + apiKey + "\n");
+	const apiKeyData = encoder.encode("\nGITYAI_VERSION=" + appVersion + "\nGEMINI_API_KEY=" + apiKey + "\n");
 	const hasGiminiEnv = await findContentInFile(Deno.cwd() + "/.env", "GEMINI_API_KEY=", true);
 	if (! hasGiminiEnv) {
 		await Deno.writeFile(Deno.cwd() + "/.env", apiKeyData, { append: true });
