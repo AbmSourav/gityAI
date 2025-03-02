@@ -1,5 +1,4 @@
 import { dbConnection } from "../helper/dbConnection.js";
-import { findContentInFile } from "../helper/findContentInFile.js";
 import { textPrompt } from "../terminalUI/textPrompt.js";
 
 export async function setup(args, exit = true) {

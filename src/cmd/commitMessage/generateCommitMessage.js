@@ -1,4 +1,4 @@
-import { geminiClient } from "../../geminiClient.js";
+import { geminiClient } from "../../aiClients/geminiClient.js";
 import { spinner } from "../../terminalUI/spinner.js";
 import { saveCommitMessage } from "./saveCommitMessage.js";
 

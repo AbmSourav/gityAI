@@ -1,4 +1,4 @@
-import { dbConnection } from "./helper/dbConnection.js";
+import { dbConnection } from "../helper/dbConnection.js";
 
 export async function geminiClient(content) {
 	const url = "https://generativelanguage.googleapis.com/v1beta";
