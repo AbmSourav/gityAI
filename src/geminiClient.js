@@ -1,10 +1,16 @@
+import { dbConnection } from "./helper/dbConnection.js";
+
 export async function geminiClient(content) {
 	const url = "https://generativelanguage.googleapis.com/v1beta";
 	const model = "/models/gemini-1.5-flash";
 	const type = ":generateContent";
-	const apiKey = "?key=" + Deno.env.get("GEMINI_API_KEY");
 
-	const res = await fetch(url + model + type + apiKey, {
+	const kv = await dbConnection();
+	const apiKey = await kv.get(["appSetup", "geminiApiKey"]);
+
+	const reqUrl = url + model + type + "?key=" + apiKey?.value;
+
+	const res = await fetch(reqUrl, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

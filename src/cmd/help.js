@@ -6,7 +6,6 @@ export function help() {
 
   Commands:
 	setup		Setup GityAI with Gemini API Key
-	setup -i	Setup GityAI with Gemini API Key and Initialize GityAI for project
 	init, -i	Initialize GityAI for project
 	cm -s		Generate commit message and save in markdown file
 	cm		Generate commit message
